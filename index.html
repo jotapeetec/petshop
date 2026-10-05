@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AuMigos Pet Shop — Tudo para o seu melhor amigo</title>
+  <meta name="description" content="AuMigos Pet Shop: rações, brinquedos, acessórios, banho & tosa e muito carinho para o seu pet." />
+
+  <!-- Fontes do Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- ============================================================
+       BIBLIOTECA 3: LEAFLET — CSS do mapa de localização
+       ============================================================ -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <!-- Nosso CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===================== HEADER / NAVBAR ===================== -->
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="#inicio" class="logo">
+        <span class="logo-icon">🐾</span> AuMigos <span>Pet Shop</span>
+      </a>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#inicio" class="nav-link">Início</a></li>
+        <li><a href="#produtos" class="nav-link">Produtos</a></li>
+        <li><a href="#servicos" class="nav-link">Serviços</a></li>
+        <li><a href="#promocoes" class="nav-link">Promoções</a></li>
+        <li><a href="#contato" class="nav-link">Contato</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="cart-btn" id="openCartBtn" aria-label="Abrir carrinho">
+          🛒
+          <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ===================== HERO / INÍCIO ===================== -->
+  <section class="hero" id="inicio">
+    <div class="hero-content container">
+      <div class="hero-text" data-anim="left">
+        <span class="hero-tag">🐶 Tudo para o seu pet</span>
+        <h1>Cuidado que o seu <span>melhor amigo</span> merece.</h1>
+        <p>
+          Rações premium, brinquedos, acessórios, banho & tosa e aquele
+          carinho de verdade. No AuMigos, seu pet é tratado como família.
+        </p>
+        <div class="hero-btns">
+          <a href="#produtos" class="btn btn-primary">Ver produtos 🦴</a>
+          <a href="#servicos" class="btn btn-outline">Nossos serviços</a>
+        </div>
+        <div class="hero-stats">
+          <div><strong data-counter="2500">0</strong><span>pets felizes</span></div>
+          <div><strong data-counter="12">0</strong><span>anos de história</span></div>
+          <div><strong data-counter="4.9">0</strong><span>nota média ⭐</span></div>
+        </div>
+      </div>
+
+      <!-- Aqui entra o mascote 3D (Three.js) -->
+      <div class="hero-3d" id="hero3d" data-anim="right">
+        <canvas id="petCanvas"></canvas>
+        <p class="hero-3d-hint">🖱️ Mova o mouse — ele te acompanha!</p>
+      </div>
+    </div>
+    <a href="#produtos" class="scroll-down" aria-label="Rolar para produtos">▼</a>
+  </section>
+
+  <!-- ===================== PRODUTOS ===================== -->
+  <section class="section" id="produtos">
+    <div class="container">
+      <span class="section-tag" data-anim="up">Loja</span>
+      <h2 class="section-title" data-anim="up">Produtos em destaque</h2>
+      <p class="section-sub" data-anim="up">Selecionados com carinho para cães e gatos de todos os tamanhos.</p>
+
+      <!-- Filtros por categoria (funcionam via JS) -->
+      <div class="filters" data-anim="up">
+        <button class="filter-btn active" data-filter="todos">Todos</button>
+        <button class="filter-btn" data-filter="racao">Rações</button>
+        <button class="filter-btn" data-filter="brinquedo">Brinquedos</button>
+        <button class="filter-btn" data-filter="acessorio">Acessórios</button>
+      </div>
+
+      <div class="products-grid" id="productsGrid"><!-- gerado via JS --></div>
+    </div>
+  </section>
+
+  <!-- ===================== SERVIÇOS ===================== -->
+  <section class="section section-dark" id="servicos">
+    <div class="container">
+      <span class="section-tag" data-anim="up">Cuidado completo</span>
+      <h2 class="section-title" data-anim="up">Nossos serviços</h2>
+      <p class="section-sub" data-anim="up">Do banho relaxante ao check-up com veterinário.</p>
+
+      <div class="services-grid">
+        <div class="service-card" data-anim="up">
+          <div class="service-icon">🛁</div>
+          <h3>Banho & Tosa</h3>
+          <p>Produtos suaves, água morna e secagem tranquila. Seu pet sai cheiroso e feliz.</p>
+          <span class="service-price">a partir de R$ 49,90</span>
+        </div>
+        <div class="service-card" data-anim="up">
+          <div class="service-icon">🩺</div>
+          <h3>Veterinário</h3>
+          <p>Consultas, vacinas e acompanhamento preventivo com equipe apaixonada por animais.</p>
+          <span class="service-price">a partir de R$ 89,90</span>
+        </div>
+        <div class="service-card" data-anim="up">
+          <div class="service-icon">✂️</div>
+          <h3>Estética Animal</h3>
+          <p>Tosas higiênicas, hidratação de pelos e corte de unhas sem estresse.</p>
+          <span class="service-price">a partir de R$ 39,90</span>
+        </div>
+        <div class="service-card" data-anim="up">
+          <div class="service-icon">🏨</div>
+          <h3>Creche & Hospedagem</h3>
+          <p>Espaço monitorado, recreação ao ar livre e relatórios diários com fotos.</p>
+          <span class="service-price">a partir de R$ 59,90/dia</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROMOÇÕES ===================== -->
+  <section class="section" id="promocoes">
+    <div class="container promo-box" data-anim="zoom">
+      <div class="promo-text">
+        <span class="section-tag">🎉 Oferta da semana</span>
+        <h2>20% OFF em rações premium!</h2>
+        <p>Válido até domingo para todas as marcas selecionadas. Aproveite e estoque o pote do seu pet.</p>
+        <button class="btn btn-primary" id="promoBtn">Quero aproveitar 🐾</button>
+      </div>
+      <div class="promo-emoji">🐕</div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTATO (com LEAFLET) ===================== -->
+  <section class="section" id="contato">
+    <div class="container">
+      <span class="section-tag" data-anim="up">Venha nos visitar</span>
+      <h2 class="section-title" data-anim="up">Onde estamos</h2>
+      <p class="section-sub" data-anim="up">Passe para conhecer a loja ou agende pelo WhatsApp.</p>
+
+      <div class="contact-grid">
+        <!-- Aqui entra o mapa (Leaflet) -->
+        <div id="mapa" data-anim="left"></div>
+
+        <div class="contact-info" data-anim="right">
+          <div class="contact-item"><span>📍</span><p>Rua dos Bichinhos, 123 — Centro<br>São Paulo/SP</p></div>
+          <div class="contact-item"><span>📞</span><p>(11) 98765-4321</p></div>
+          <div class="contact-item"><span>✉️</span><p>oi@aumigos.com.br</p></div>
+          <div class="contact-item"><span>🕐</span><p>Seg a Sáb — 8h às 20h</p></div>
+          <a class="btn btn-primary btn-block" href="https://wa.me/5511987654321" target="_blank" rel="noopener">Agendar pelo WhatsApp 💬</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container">
+      <a href="#inicio" class="logo"><span class="logo-icon">🐾</span> AuMigos <span>Pet Shop</span></a>
+      <p>Feito com ❤️ e muitos lambeijos.</p>
+      <small>© 2026 AuMigos Pet Shop — Three.js | GSAP | Leaflet</small>
+    </div>
+  </footer>
+
+  <!-- ===================== CARRINHO (modal próprio) ===================== -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-modal" id="cartModal" aria-label="Carrinho de compras">
+    <div class="cart-head">
+      <h3>Seu carrinho 🛒</h3>
+      <button class="cart-close" id="closeCartBtn" aria-label="Fechar">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems"><!-- gerado via JS --></div>
+    <div class="cart-foot">
+      <div class="cart-total">Total: <strong id="cartTotal">R$ 0,00</strong></div>
+      <button class="btn btn-primary btn-block" id="checkoutBtn">Finalizar pedido 🐾</button>
+    </div>
+  </aside>
+
+  <!-- ===================== TOAST (avisos animados) ===================== -->
+  <div class="toast" id="toast"></div>
+
+  <!-- ============================================================
+       BIBLIOTECA 1: THREE.JS — cena 3D do mascote
+       ============================================================ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
+
+  <!-- ============================================================
+       BIBLIOTECA 2: GSAP — animações de entrada, scroll e microinterações
+       ============================================================ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- ============================================================
+       BIBLIOTECA 3: LEAFLET — mapa interativo da loja
+       ============================================================ -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Nosso script -->
+  <script src="script.js"></script>
+</body>
+</html>
